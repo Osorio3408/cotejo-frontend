@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+@theme {
+  /* Ejemplo de colores personalizados */
+  --color-midnight: #121063;
+  --color-tahiti: #3ab7bf;
+  --color-bermuda: #78dcca;
+
+  /* 🎨 Tu paleta personalizada "brand" */
+  --color-brand-50:  #ecfff6;
+  --color-brand-100: #c8ffe6;
+  --color-brand-200: #94f7cf;
+  --color-brand-300: #54e9b3;
+  --color-brand-400: #1fd89a;
+  --color-brand-500: #00c481; /* Verde COTEJO */
+  --color-brand-600: #00a871;
+  --color-brand-700: #008a5f;
+  --color-brand-800: #066c4e;
+  --color-brand-900: #0a5742;
+
+  --color-main-bg: #121C21;
+}
