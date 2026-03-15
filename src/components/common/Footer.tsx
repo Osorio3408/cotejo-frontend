@@ -13,7 +13,7 @@ export default function Footer() {
             Contacto
           </a>
         </div>
-        <div>© {new Date().getFullYear()} Cotejo. Todos los derechos reservados</div>
+        <div className="text-center">© {new Date().getFullYear()} Cotejo. Todos los derechos reservados</div>
       </div>
     </footer>
   );

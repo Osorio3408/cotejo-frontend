@@ -2,9 +2,8 @@ export type Field = {
   id: string
   name: string
   city: string
-  surface: "sintética" | "natural" | "mixta"
+  sport: "futbol" | "basket" | "tenis" | "voley" | "beisbol" | "natacion"
   pricePerHour: number
   rating: number
-  image?: string
-  amenities: Array<"parqueadero" | "iluminación" | "duchas" | "cafetería">
+  image: string
 }

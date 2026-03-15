@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/Button";
 import { IconCalendar, IconSearch, IconBall } from "@/components/ui/Icons";
 import { Pill } from "@/components/ui/Pill";
 import BenefitItem from "./components/BenefitItem";
+import { Link } from "react-router-dom";
 
 export default function HomePage() {
   return (
@@ -32,7 +33,10 @@ export default function HomePage() {
           </div>
 
           <div className="flex gap-3">
-            <Button variant="primary">Buscar canchas</Button>
+            <Link to={"/fields"}>
+              {" "}
+              <Button variant="primary">Buscar canchas</Button>
+            </Link>
             <Button variant="secondary">Publicar mi cancha…</Button>
           </div>
         </div>
@@ -50,7 +54,10 @@ export default function HomePage() {
         <h2 className="text-2xl font-semibold text-white">
           ¿Por qué <span className="text-brand-500">Cotejo</span>?
         </h2>
-        <h3 className="text-xl">Porque un <span className="text-brand-500">Cotejo</span> no es solo un partido, es:</h3>
+        <h3 className="text-xl">
+          Porque un <span className="text-brand-500">Cotejo</span> no es solo un
+          partido, es:
+        </h3>
         <div className="space-y-2 text-xl">
           <BenefitItem>El gol que se celebra como una gran final</BenefitItem>
           <BenefitItem>Esas puyas entre amigos</BenefitItem>
@@ -87,15 +94,16 @@ export default function HomePage() {
             <span>Reserva</span>
           </div>
           <div className="flex items-center gap-2 rounded-lg bg-transparent border border-white text-gray-300 px-3 py-2">
-           ✓
-            <span>Disfruta y juega</span>
+            ✓<span>Disfruta y juega</span>
           </div>
         </div>
 
         <div className="flex items-center justify-center gap-3 mt-20">
-          <Button variant="secondary" className="rounded-full px-5">
-            ¿Listo para el cotejo?
-          </Button>
+          <Link to={"/fields"}>
+            <Button variant="secondary" className="rounded-full px-5">
+              ¿Listo para el cotejo?
+            </Button>
+          </Link>
           <Button variant="primary" className="rounded-full px-5">
             ¿Tienes una cancha?
           </Button>
