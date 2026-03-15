@@ -111,7 +111,7 @@ function SelectField({
         <select
           value={value}
           onChange={onChange}
-          className="h-12 w-full appearance-none rounded-2xl border border-white/10 bg-white/[0.04] pl-11 pr-10 text-sm text-gray-100 outline-none transition focus:border-brand-400/60 focus:bg-white/[0.06]"
+          className="h-12 w-full appearance-none rounded-2xl border border-white/10 bg-main-bg pl-11 pr-10 text-sm text-white outline-none transition focus:border-brand-400/60"
         >
           {children}
         </select>
@@ -135,7 +135,7 @@ export default function FieldFilters({
   onMaxPrice,
   onSort,
 }: Props) {
-  const [open, setOpen] = useState(true)
+  const [open, setOpen] = useState(false)
 
   const change =
     (fn: (v: string) => void) =>
@@ -168,72 +168,49 @@ export default function FieldFilters({
 
   return (
     <section className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-xl shadow-black/10">
-      <div className="border-b border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(0,196,129,0.16),_transparent_35%)] px-5 py-5 md:px-6">
-        <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+      <div className="border-b border-white/10 bg-[radial-gradient(circle_at_top_left,_rgba(0,196,129,0.16),_transparent_35%)] px-5 py-4">
+        <div className="flex items-start justify-between gap-3">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/10 px-3 py-1 text-sm text-brand-300">
+            <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/10 px-3 py-1 text-xs text-brand-300">
               <SlidersHorizontal className="h-4 w-4" />
-              Filtros inteligentes
+              Filtros
             </div>
             <div>
-              <h2 className="text-2xl font-semibold text-white">
-                Encuentra la cancha ideal para tu proximo partido
+              <h2 className="text-lg font-semibold text-white">
+                Ajusta tu busqueda
               </h2>
-              <p className="mt-1 max-w-2xl text-sm leading-6 text-gray-400">
-                Ajusta deporte, ciudad, presupuesto y orden para descubrir
-                opciones que realmente te sirvan.
+              <p className="text-sm leading-6 text-gray-400">
+                {resultsCount} de {totalCount} canchas disponibles
               </p>
             </div>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <div className="rounded-2xl border border-white/10 bg-black/15 px-4 py-3 text-sm">
-              <div className="font-semibold text-white">
-                {resultsCount} de {totalCount} canchas
-              </div>
-              <div className="text-gray-400">
-                {activeCount
-                  ? `${activeCount} filtro${activeCount > 1 ? "s" : ""} activo${activeCount > 1 ? "s" : ""}`
-                  : "Sin filtros activos"}
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => setOpen((value) => !value)}
-              className="inline-flex h-12 items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-4 text-sm font-medium text-gray-100 transition hover:bg-white/[0.07]"
-              aria-expanded={open}
-            >
-              <span>{open ? "Ocultar filtros" : "Mostrar filtros"}</span>
-              <ChevronDown
-                className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
-              />
-            </button>
-
-            <button
-              type="button"
-              onClick={clearAll}
-              className="inline-flex h-12 items-center gap-2 rounded-2xl border border-white/10 px-4 text-sm font-medium text-gray-300 transition hover:border-brand-400/40 hover:text-white"
-            >
-              <X className="h-4 w-4" />
-              Limpiar
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => setOpen((value) => !value)}
+            className="inline-flex h-10 items-center gap-2 rounded-2xl border border-white/10 bg-white/[0.04] px-4 text-sm font-medium text-gray-100 transition hover:bg-white/[0.07] md:hidden"
+            aria-expanded={open}
+          >
+            <span>{open ? "Ocultar" : "Ver"}</span>
+            <ChevronDown
+              className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`}
+            />
+          </button>
         </div>
       </div>
 
       <div
-        className={`grid transition-[grid-template-rows] duration-300 ease-in-out ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
+        className={`grid transition-[grid-template-rows] duration-300 ease-in-out md:grid-rows-[1fr] ${open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"}`}
       >
         <div className="overflow-hidden">
-          <div className="space-y-6 px-5 py-5 md:px-6 md:py-6">
+          <div className="space-y-5 px-5 py-5">
             <label className="relative block">
               <Search className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-500" />
               <input
                 value={q}
                 onChange={change(onQ)}
                 placeholder="Busca por nombre, sede o referencia"
-                className="h-14 w-full rounded-2xl border border-white/10 bg-white/[0.04] pl-12 pr-12 text-base text-gray-100 placeholder:text-gray-500 outline-none transition focus:border-brand-400/60 focus:bg-white/[0.06]"
+                className="h-12 w-full rounded-2xl border border-white/10 bg-white/[0.04] pl-12 pr-12 text-sm text-gray-100 placeholder:text-gray-500 outline-none transition focus:border-brand-400/60 focus:bg-white/[0.06]"
               />
               {q && (
                 <button
@@ -247,7 +224,7 @@ export default function FieldFilters({
               )}
             </label>
 
-            <div className="grid gap-4 xl:grid-cols-[1.2fr,1fr,1fr]">
+            <div className="space-y-4">
               <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.025] p-4">
                 <div className="mb-3 flex items-center gap-2">
                   <div className="rounded-xl bg-brand-500/10 p-2 text-brand-300">
@@ -343,7 +320,7 @@ export default function FieldFilters({
                     step={5000}
                     value={maxPrice}
                     onChange={(event) => onMaxPrice(parseInt(event.target.value))}
-                    className="w-full accent-brand-500"
+                    className="range-slider w-full appearance-none bg-transparent"
                   />
                   <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10">
                     <div
@@ -356,6 +333,17 @@ export default function FieldFilters({
                     <span>${DEFAULT_MAX.toLocaleString()}</span>
                   </div>
                 </div>
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-2xl border border-white/10 px-4 text-sm font-medium text-gray-300 transition hover:border-brand-400/40 hover:text-white"
+                >
+                  <X className="h-4 w-4" />
+                  Limpiar
+                </button>
               </div>
             </div>
 

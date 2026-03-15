@@ -120,17 +120,19 @@ export default function FieldsPage() {
 
   return (
     <div className="space-y-8 pb-8 md:space-y-10">
-      <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-8 md:px-8">
-        <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+      <section className="rounded-[2rem] border border-white/10 bg-white/[0.03] px-6 py-6 md:px-8">
+        <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
           <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/10 px-3 py-1 text-sm text-brand-300">
               <Sparkles className="h-4 w-4" />
               Descubre tu proximo escenario
             </div>
-            <h1 className="text-3xl font-semibold text-white md:text-4xl">
+            <h1 className="text-3xl font-semibold text-white md:text-[2.5rem]">
               Canchas listas para reservar
             </h1>
-            <p className="text-base leading-7 text-gray-400">{subtitle}</p>
+            <p className="max-w-2xl text-sm leading-6 text-gray-400 md:text-base">
+              {subtitle}
+            </p>
           </div>
 
           <div className="grid gap-3 sm:grid-cols-2">
@@ -151,50 +153,54 @@ export default function FieldsPage() {
         </div>
       </section>
 
-      <FieldFilters
-        q={q}
-        city={city}
-        sport={sport}
-        maxPrice={maxPrice}
-        sort={sort}
-        resultsCount={data.length}
-        totalCount={MOCK.length}
-        onQ={setQ}
-        onCity={setCity}
-        onSport={setSport}
-        onMaxPrice={setMaxPrice}
-        onSort={setSort}
-      />
+      <div className="grid gap-6 md:grid-cols-[280px_minmax(0,1fr)] md:items-start lg:grid-cols-[300px_minmax(0,1fr)] xl:grid-cols-[320px_minmax(0,1fr)]">
+        <aside className="md:sticky md:top-20 md:self-start">
+          <FieldFilters
+            q={q}
+            city={city}
+            sport={sport}
+            maxPrice={maxPrice}
+            sort={sort}
+            resultsCount={data.length}
+            totalCount={MOCK.length}
+            onQ={setQ}
+            onCity={setCity}
+            onSport={setSport}
+            onMaxPrice={setMaxPrice}
+            onSort={setSort}
+          />
+        </aside>
 
-      {data.length > 0 ? (
-        <section className="space-y-4">
-          <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-white md:text-2xl">
-              {data.length} cancha{data.length !== 1 ? "s" : ""} encontrada
-              {data.length !== 1 ? "s" : ""}
+        {data.length > 0 ? (
+          <section className="min-w-0 space-y-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="text-xl font-semibold text-white md:text-2xl">
+                {data.length} cancha{data.length !== 1 ? "s" : ""} encontrada
+                {data.length !== 1 ? "s" : ""}
+              </h2>
+              <p className="text-sm text-gray-500">
+                Elige la opcion que mejor se adapte a tu plan.
+              </p>
+            </div>
+
+            <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-3">
+              {data.map((field) => (
+                <FieldCard key={field.id} f={field} />
+              ))}
+            </div>
+          </section>
+        ) : (
+          <section className="rounded-[2rem] border border-dashed border-white/10 bg-white/[0.02] px-6 py-10 text-center">
+            <h2 className="text-2xl font-semibold text-white">
+              No encontramos canchas con esos filtros
             </h2>
-            <p className="text-sm text-gray-500">
-              Elige la opcion que mejor se adapte a tu plan.
+            <p className="mx-auto mt-3 max-w-xl text-gray-400">
+              Prueba ampliando el presupuesto, cambiando de ciudad o quitando un
+              filtro para descubrir mas opciones.
             </p>
-          </div>
-
-          <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
-            {data.map((field) => (
-              <FieldCard key={field.id} f={field} />
-            ))}
-          </div>
-        </section>
-      ) : (
-        <section className="rounded-[2rem] border border-dashed border-white/10 bg-white/[0.02] px-6 py-10 text-center">
-          <h2 className="text-2xl font-semibold text-white">
-            No encontramos canchas con esos filtros
-          </h2>
-          <p className="mx-auto mt-3 max-w-xl text-gray-400">
-            Prueba ampliando el presupuesto, cambiando de ciudad o quitando un
-            filtro para descubrir mas opciones.
-          </p>
-        </section>
-      )}
+          </section>
+        )}
+      </div>
     </div>
   )
 }
