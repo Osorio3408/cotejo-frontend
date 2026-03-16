@@ -199,6 +199,56 @@ export default function FieldDetailPage() {
     navigate(`/booking?${params.toString()}`)
   }
 
+  const reviewsSection = (
+    <section className="space-y-6">
+      <div className="space-y-2">
+        <p className="text-sm font-medium uppercase tracking-[0.2em] text-brand-300">
+          Opiniones
+        </p>
+        <h2 className="text-2xl font-semibold text-white">
+          Jugadores que ya reservaron aqui
+        </h2>
+      </div>
+
+      <div className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 md:p-7">
+        <div className="grid gap-4 md:grid-cols-[180px,1fr]">
+          <div className="rounded-2xl border border-white/10 bg-black/15 p-5 text-center">
+            <div className="text-4xl font-bold text-white">
+              {data.rating.toFixed(1)}
+            </div>
+            <div className="mt-2">
+              <RatingStars value={data.rating} />
+            </div>
+            <div className="mt-2 text-xs text-gray-400">
+              {data.reviewsCount} reviews
+            </div>
+          </div>
+
+          <div className="rounded-2xl border border-white/10 bg-black/15 p-4">
+            <div className="grid gap-2">
+              {data.ratingBreakdown.map((item) => (
+                <div
+                  key={item.stars}
+                  className="grid grid-cols-[24px,1fr,40px] items-center gap-2 text-sm"
+                >
+                  <span className="text-gray-300">{item.stars}</span>
+                  <ProgressBar pct={item.pct} />
+                  <span className="text-gray-400">{item.pct}%</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 rounded-2xl border border-white/10 bg-black/15 px-4">
+          {reviewItems.map((review) => (
+            <ReviewItem key={review.id} r={review} />
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+
   return (
     <div className="space-y-8 pb-8 md:space-y-10">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
@@ -270,29 +320,6 @@ export default function FieldDetailPage() {
               </div>
             </div>
 
-            <div className="grid gap-3 sm:grid-cols-4">
-              {data.images.map((image, index) => (
-                <button
-                  key={image}
-                  type="button"
-                  onClick={() => setGalleryIndex(index)}
-                  className={[
-                    "overflow-hidden rounded-[1.25rem] border transition",
-                    galleryIndex === index
-                      ? "border-brand-400 shadow-lg shadow-brand-500/10"
-                      : "border-white/10 hover:border-brand-400/30",
-                  ].join(" ")}
-                  aria-label={`Ver imagen ${index + 1}`}
-                >
-                  <div
-                    className="h-20 w-full bg-cover bg-center"
-                    style={{
-                      backgroundImage: `linear-gradient(180deg, rgba(18,28,33,0.04) 0%, rgba(18,28,33,0.35) 100%), url(${image})`,
-                    }}
-                  />
-                </button>
-              ))}
-            </div>
           </section>
 
           <section className="grid gap-4 md:grid-cols-3">
@@ -339,51 +366,8 @@ export default function FieldDetailPage() {
             </div>
           </section>
 
-          <section className="rounded-[1.75rem] border border-white/10 bg-white/[0.03] p-6 md:p-7">
-            <div className="mb-6 space-y-2">
-              <p className="text-sm font-medium uppercase tracking-[0.2em] text-brand-300">
-                Opiniones
-              </p>
-              <h2 className="text-2xl font-semibold text-white">
-                Jugadores que ya reservaron aqui
-              </h2>
-            </div>
+          <div className="hidden lg:block">{reviewsSection}</div>
 
-            <div className="grid gap-4 md:grid-cols-[180px,1fr]">
-              <div className="rounded-2xl border border-white/10 bg-black/15 p-5 text-center">
-                <div className="text-4xl font-bold text-white">
-                  {data.rating.toFixed(1)}
-                </div>
-                <div className="mt-2">
-                  <RatingStars value={data.rating} />
-                </div>
-                <div className="mt-2 text-xs text-gray-400">
-                  {data.reviewsCount} reviews
-                </div>
-              </div>
-
-              <div className="rounded-2xl border border-white/10 bg-black/15 p-4">
-                <div className="grid gap-2">
-                  {data.ratingBreakdown.map((item) => (
-                    <div
-                      key={item.stars}
-                      className="grid grid-cols-[24px,1fr,40px] items-center gap-2 text-sm"
-                    >
-                      <span className="text-gray-300">{item.stars}</span>
-                      <ProgressBar pct={item.pct} />
-                      <span className="text-gray-400">{item.pct}%</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 rounded-2xl border border-white/10 bg-black/15 px-4">
-              {reviewItems.map((review) => (
-                <ReviewItem key={review.id} r={review} />
-              ))}
-            </div>
-          </section>
         </div>
 
         <aside className="lg:sticky lg:top-20">
@@ -545,6 +529,8 @@ export default function FieldDetailPage() {
             </div>
           </div>
         </aside>
+
+        <div className="lg:hidden">{reviewsSection}</div>
       </div>
     </div>
   )
