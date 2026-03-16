@@ -435,9 +435,15 @@ export default function FieldDetailPage() {
                     disabledDates={[]}
                     availableDates={availableDates}
                   />
-                  <div className="flex items-center gap-2 text-xs text-gray-400">
-                    <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand-500" />
-                    Dias con horarios disponibles
+                  <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-gray-400">
+                    <span className="inline-flex items-center gap-2">
+                      <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand-500" />
+                      Dias con horarios disponibles
+                    </span>
+                    <span className="inline-flex items-center gap-2">
+                      <span className="inline-flex h-2.5 w-2.5 rounded-full bg-gray-500/70" />
+                      Dias sin horarios disponibles
+                    </span>
                   </div>
                 </div>
 
