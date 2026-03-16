@@ -24,17 +24,29 @@ export default function MiniCalendar({
   value,
   onChange,
   disabledDates = [],
+  availableDates,
 }: {
   value?: Date | null
   onChange: (d: Date) => void
   disabledDates?: string[] // YYYY-MM-DD
+  availableDates?: string[]
 }) {
   const [cursor, setCursor] = useState<Date>(value ?? new Date())
   const weeks = useMemo(() => getMonthMatrix(cursor), [cursor])
 
   const isSameDay = (a: Date, b?: Date | null) =>
     !!b && a.toDateString() === b.toDateString()
-  const isDisabled = (d: Date) => disabledDates.includes(d.toISOString().slice(0,10))
+  const dateKey = (date: Date) => date.toISOString().slice(0, 10)
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
+
+  const isDisabled = (d: Date) => {
+    const key = dateKey(d)
+    const isPast = d < today
+    const manuallyDisabled = disabledDates.includes(key)
+    const unavailable = availableDates ? !availableDates.includes(key) : false
+    return isPast || manuallyDisabled || unavailable
+  }
 
   const monthName = cursor.toLocaleString("es-ES", { month: "long", year: "numeric" })
 
@@ -65,11 +77,11 @@ export default function MiniCalendar({
               disabled={disabled}
               onClick={() => onChange(d)}
               className={[
-                "h-8 rounded-md text-sm tabular-nums",
-                selected && "bg-brand-500 text-white",
+                "h-9 rounded-xl text-sm tabular-nums transition",
+                selected && "bg-brand-500 text-white shadow-lg shadow-brand-500/20",
                 !selected && isCurMonth && !disabled && "bg-white/10 text-gray-100 hover:bg-white/20",
                 !selected && !isCurMonth && "bg-white/5 text-gray-500",
-                disabled && "opacity-40 cursor-not-allowed",
+                disabled && "cursor-not-allowed bg-white/[0.03] text-gray-600",
               ].filter(Boolean).join(" ")}
             >
               {d.getDate()}

@@ -8,6 +8,7 @@ const RegisterPage = lazy(() => import("@/pages/auth/RegisterPage"))
 const FieldsPage = lazy(() => import("@/pages/fields/FieldsPage"))
 const NotFoundPage = lazy(() => import("@/pages/not-found/NotFoundPage"))
 const FieldDetailPage = lazy(() => import("@/pages/fields/FieldDetailPage"))
+const BookingCheckoutPage = lazy(() => import("@/pages/fields/BookingCheckoutPage"))
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       { path: "/", element: <HomePage /> },
       { path: "/fields", element: <FieldsPage /> },
       { path: "/fields/:id", element: <FieldDetailPage /> }, // 👈 detalle
+      { path: "/booking", element: <BookingCheckoutPage /> },
       { path: "/login", element: <LoginPage /> },
       { path: "/register", element: <RegisterPage /> },
       { path: "*", element: <NotFoundPage /> },
