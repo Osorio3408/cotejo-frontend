@@ -21,6 +21,152 @@
   --color-main-bg: #121C21;
 }
 
+:root {
+  --app-bg: #121c21;
+  --app-surface: rgba(255, 255, 255, 0.03);
+  --app-surface-strong: rgba(255, 255, 255, 0.06);
+  --app-panel: rgba(0, 0, 0, 0.15);
+  --app-border: rgba(255, 255, 255, 0.1);
+  --app-heading: #ffffff;
+  --app-text: #d1d5db;
+  --app-muted: #9ca3af;
+  --app-soft: #6b7280;
+  --app-input-bg: #162329;
+  --app-input-text: #f3f4f6;
+  --app-input-placeholder: #6b7280;
+}
+
+[data-theme="light"] {
+  --color-brand-50: #eff6ff;
+  --color-brand-100: #dbeafe;
+  --color-brand-200: #bfdbfe;
+  --color-brand-300: #93c5fd;
+  --color-brand-400: #60a5fa;
+  --color-brand-500: #3b82f6;
+  --color-brand-600: #2563eb;
+  --color-brand-700: #1d4ed8;
+  --color-brand-800: #1e40af;
+  --color-brand-900: #1e3a8a;
+  --color-main-bg: #f4f8fc;
+
+  --app-bg: #f4f8fc;
+  --app-surface: rgba(255, 255, 255, 0.96);
+  --app-surface-strong: rgba(219, 234, 254, 0.98);
+  --app-panel: rgba(226, 232, 240, 0.82);
+  --app-border: rgba(148, 163, 184, 0.42);
+  --app-heading: #0f172a;
+  --app-text: #334155;
+  --app-muted: #475569;
+  --app-soft: #64748b;
+  --app-input-bg: #ffffff;
+  --app-input-text: #0f172a;
+  --app-input-placeholder: #94a3b8;
+}
+
+html,
+body,
+#root {
+  background-color: var(--app-bg);
+  color: var(--app-text);
+}
+
+body {
+  transition:
+    background-color 180ms ease,
+    color 180ms ease;
+}
+
+.text-white {
+  color: var(--app-heading) !important;
+}
+
+.text-gray-100,
+.text-gray-200,
+.text-gray-300 {
+  color: var(--app-text) !important;
+}
+
+.text-gray-400,
+.text-gray-500,
+.text-gray-600 {
+  color: var(--app-muted) !important;
+}
+
+.text-gray-700,
+.text-gray-900 {
+  color: var(--app-heading) !important;
+}
+
+.bg-main-bg {
+  background-color: var(--app-bg) !important;
+}
+
+.bg-white {
+  background-color: var(--app-input-bg) !important;
+}
+
+.bg-black\/15 {
+  background-color: var(--app-panel) !important;
+}
+
+[data-theme="light"] .border-white\/10 {
+  border-color: rgba(148, 163, 184, 0.35) !important;
+}
+
+[data-theme="light"] .bg-white\/\[0\.03\],
+[data-theme="light"] .bg-white\/\[0\.04\],
+[data-theme="light"] .bg-white\/\[0\.05\],
+[data-theme="light"] .bg-white\/\[0\.025\],
+[data-theme="light"] .bg-white\/10,
+[data-theme="light"] .bg-white\/5 {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+}
+
+[data-theme="light"] .bg-brand-500\/10 {
+  background-color: rgba(59, 130, 246, 0.12) !important;
+}
+
+[data-theme="light"] .shadow-xl,
+[data-theme="light"] .shadow-2xl {
+  box-shadow: 0 18px 40px rgba(37, 99, 235, 0.08) !important;
+}
+
+.app-surface {
+  background-color: var(--app-surface);
+  border-color: var(--app-border);
+}
+
+.app-panel {
+  background-color: var(--app-panel);
+  border-color: var(--app-border);
+}
+
+.app-heading {
+  color: var(--app-heading);
+}
+
+.app-text {
+  color: var(--app-text);
+}
+
+.app-muted {
+  color: var(--app-muted);
+}
+
+.app-soft {
+  color: var(--app-soft);
+}
+
+.app-input {
+  background-color: var(--app-input-bg);
+  color: var(--app-input-text);
+  border-color: var(--app-border);
+}
+
+.app-input::placeholder {
+  color: var(--app-input-placeholder);
+}
+
 .range-slider::-webkit-slider-runnable-track {
   height: 0.5rem;
   background: transparent;
@@ -53,6 +199,6 @@
 }
 
 select option {
-  background-color: var(--color-main-bg);
-  color: white;
+  background-color: var(--app-input-bg);
+  color: var(--app-input-text);
 }

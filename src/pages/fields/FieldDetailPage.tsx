@@ -252,7 +252,7 @@ export default function FieldDetailPage() {
   return (
     <div className="space-y-8 pb-8 md:space-y-10">
       <div className="grid gap-8 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
-        <div className="space-y-8">
+        <div className="space-y-8 lg:order-1">
           <section className="space-y-5">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-2 rounded-full border border-brand-500/20 bg-brand-500/10 px-3 py-1 text-sm text-brand-300">
@@ -366,11 +366,11 @@ export default function FieldDetailPage() {
             </div>
           </section>
 
-          <div className="hidden lg:block">{reviewsSection}</div>
+          {reviewsSection}
 
         </div>
 
-        <aside className="lg:sticky lg:top-20">
+        <aside className="order-first lg:order-2 lg:sticky lg:top-20">
           <div className="space-y-4">
             <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-1">
               <div className="rounded-[1.5rem] border border-white/10 bg-white/[0.03] p-5">
@@ -530,7 +530,6 @@ export default function FieldDetailPage() {
           </div>
         </aside>
 
-        <div className="lg:hidden">{reviewsSection}</div>
       </div>
     </div>
   )

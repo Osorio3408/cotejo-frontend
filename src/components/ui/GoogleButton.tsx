@@ -6,10 +6,9 @@ export default function GoogleButton(props: ButtonHTMLAttributes<HTMLButtonEleme
       {...props}
       className={[
         "h-12 w-full rounded-full",
-        "bg-white text-gray-900",
-        "border border-white/10",
+        "app-input border",
         "inline-flex items-center justify-center gap-3",
-        "font-medium transition hover:bg-gray-50",
+        "font-medium transition hover:bg-[var(--app-surface-strong)]",
       ].join(" ")}
     >
       {/* logo google minimal */}

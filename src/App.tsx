@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import AppLayout from "@/layouts/AppLayout"
 import AppLoadingScreen from "@/components/common/AppLoadingScreen"
+import { ThemeProvider } from "@/components/common/ThemeProvider"
 
 const HomePage = lazy(() => import("@/pages/home/HomePage"))
 const LoginPage = lazy(() => import("@/pages/auth/LoginPage"))
@@ -28,8 +29,10 @@ const router = createBrowserRouter([
 
 export default function App() {
   return (
-    <Suspense fallback={<AppLoadingScreen />}>
-      <RouterProvider router={router} />
-    </Suspense>
+    <ThemeProvider>
+      <Suspense fallback={<AppLoadingScreen />}>
+        <RouterProvider router={router} />
+      </Suspense>
+    </ThemeProvider>
   )
 }

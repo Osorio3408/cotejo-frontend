@@ -5,7 +5,7 @@ import ScrollToTop from "@/components/common/ScrollToTop"
 
 export default function AppLayout() {
   return (
-    <div className="min-h-dvh bg-main-bg text-gray-300">
+    <div className="min-h-dvh bg-main-bg app-text">
       <ScrollToTop />
       <Navbar />
       <main className="mx-auto max-w-7xl px-4 py-6">

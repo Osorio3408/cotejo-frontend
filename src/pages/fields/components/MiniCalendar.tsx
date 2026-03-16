@@ -49,9 +49,11 @@ export default function MiniCalendar({
   }
 
   const monthName = cursor.toLocaleString("es-ES", { month: "long", year: "numeric" })
+  const hasAvailability = (d: Date) =>
+    availableDates ? availableDates.includes(dateKey(d)) : !isDisabled(d)
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+    <div className="rounded-2xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-black/5">
       <div className="flex items-center justify-between mb-3">
         <button onClick={() => setCursor(new Date(cursor.getFullYear(), cursor.getMonth()-1, 1))} className="p-1 rounded hover:bg-white/10">
           <ChevronLeft className="h-4 w-4" />
@@ -71,17 +73,24 @@ export default function MiniCalendar({
           const isCurMonth = d.getMonth() === cursor.getMonth()
           const selected = isSameDay(d, value)
           const disabled = isDisabled(d)
+          const available = isCurMonth && !disabled && hasAvailability(d)
           return (
             <button
               key={i}
               disabled={disabled}
               onClick={() => onChange(d)}
               className={[
-                "h-9 rounded-xl text-sm tabular-nums transition",
-                selected && "bg-brand-500 text-white shadow-lg shadow-brand-500/20",
-                !selected && isCurMonth && !disabled && "bg-white/10 text-gray-100 hover:bg-white/20",
-                !selected && !isCurMonth && "bg-white/5 text-gray-500",
-                disabled && "cursor-not-allowed bg-white/[0.03] text-gray-600",
+                "h-9 rounded-xl border text-sm tabular-nums transition",
+                selected &&
+                  "border-brand-600 bg-brand-500 text-white shadow-lg shadow-brand-500/30 ring-2 ring-brand-200/70",
+                !selected &&
+                  available &&
+                  "border-brand-200/60 bg-brand-500/10 text-gray-100 shadow-sm hover:border-brand-400/70 hover:bg-brand-500/16",
+                !selected &&
+                  !isCurMonth &&
+                  "border-transparent bg-white/5 text-gray-500",
+                disabled &&
+                  "cursor-not-allowed border-transparent bg-white/[0.03] text-gray-600 opacity-70",
               ].filter(Boolean).join(" ")}
             >
               {d.getDate()}
